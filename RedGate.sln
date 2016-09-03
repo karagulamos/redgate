@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGateOne", "RedGateOne\RedGateOne.csproj", "{5BDF692F-ABFD-4112-B4E6-E237593E18D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGateTwo", "RedGateTwo\RedGateTwo.csproj", "{409442DB-A865-4B81-B719-47EDB3025D20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGate.Shared", "RedGate.Shared\RedGate.Shared.csproj", "{B00C6D7C-156D-4607-AC12-2D15032E5ED1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5BDF692F-ABFD-4112-B4E6-E237593E18D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BDF692F-ABFD-4112-B4E6-E237593E18D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BDF692F-ABFD-4112-B4E6-E237593E18D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BDF692F-ABFD-4112-B4E6-E237593E18D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{409442DB-A865-4B81-B719-47EDB3025D20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{409442DB-A865-4B81-B719-47EDB3025D20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{409442DB-A865-4B81-B719-47EDB3025D20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{409442DB-A865-4B81-B719-47EDB3025D20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B00C6D7C-156D-4607-AC12-2D15032E5ED1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B00C6D7C-156D-4607-AC12-2D15032E5ED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B00C6D7C-156D-4607-AC12-2D15032E5ED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B00C6D7C-156D-4607-AC12-2D15032E5ED1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
