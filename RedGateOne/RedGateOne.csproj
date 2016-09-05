@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RedGateTests">
-      <HintPath>..\RedGate.Tests\bin\Debug\RedGateTests.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -49,6 +46,10 @@
     <ProjectReference Include="..\RedGate.Shared\RedGate.Shared.csproj">
       <Project>{B00C6D7C-156D-4607-AC12-2D15032E5ED1}</Project>
       <Name>RedGate.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RedGate.Tests\RedGate.Tests.csproj">
+      <Project>{4B52D9AE-936E-4E30-B4AA-92DE3E29B6A5}</Project>
+      <Name>RedGate.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

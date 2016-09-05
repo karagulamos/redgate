@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGateTwo", "RedGateTwo\Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGate.Shared", "RedGate.Shared\RedGate.Shared.csproj", "{B00C6D7C-156D-4607-AC12-2D15032E5ED1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedGate.Tests", "RedGate.Tests\RedGate.Tests.csproj", "{4B52D9AE-936E-4E30-B4AA-92DE3E29B6A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B00C6D7C-156D-4607-AC12-2D15032E5ED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B00C6D7C-156D-4607-AC12-2D15032E5ED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B00C6D7C-156D-4607-AC12-2D15032E5ED1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B52D9AE-936E-4E30-B4AA-92DE3E29B6A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B52D9AE-936E-4E30-B4AA-92DE3E29B6A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B52D9AE-936E-4E30-B4AA-92DE3E29B6A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B52D9AE-936E-4E30-B4AA-92DE3E29B6A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
