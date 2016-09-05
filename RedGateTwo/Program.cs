@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using RedGate.Shared;
@@ -18,7 +19,13 @@ namespace RedGateTwo
 
             using (var wordCounter = new ParallelWordFrequencyCounter(characterReaders, StringComparer.InvariantCultureIgnoreCase))
             {
-                PrintOrderedWordCount(wordCounter.GetWordFrequency(), TimeSpan.FromSeconds(10));
+                var stopWatch = new Stopwatch();
+                stopWatch.Start();
+                var counter = wordCounter.GetWordFrequency();
+                stopWatch.Stop();
+
+                Console.WriteLine("Time: {0}", stopWatch.Elapsed.TotalSeconds);
+                PrintOrderedWordCount(counter, TimeSpan.FromSeconds(10));
             }
 
             Console.ReadKey();
