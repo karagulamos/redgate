@@ -27,16 +27,21 @@ namespace RedGate.Shared
 
             Parallel.ForEach(_readers, options, reader =>
             {
-                var enumerator = new DefaultWordEnumerator();
-
-                while (true)
+                using (var wordEnumerator = new WordEnumerator(reader))
                 {
-                    var word = enumerator.GetNextWord(reader);
+                    var localWordCounter = new Dictionary<string, int>();
 
-                    if (string.IsNullOrEmpty(word))
-                        break;
+                    while (wordEnumerator.MoveNext())
+                    {
+                        var word = wordEnumerator.Current;
+                        localWordCounter[word] = localWordCounter.ContainsKey(word) ? ++localWordCounter[word] : 1;
+                    }
 
-                    combinedWordCount[word] = combinedWordCount.ContainsKey(word) ? ++combinedWordCount[word] : 1;
+                    foreach (var wordCounter in localWordCounter)
+                    {
+                        var counter = wordCounter;
+                        combinedWordCount.AddOrUpdate(counter.Key, counter.Value, (key, value) => counter.Value + value);
+                    }
                 }
             });
 

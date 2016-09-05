@@ -37,7 +37,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefaultWordEnumerator.cs" />
+    <Compile Include="WordEnumerator.cs" />
     <Compile Include="IWordFrequencyCounter.cs" />
     <Compile Include="ParallelWordFrequencyCounter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
