@@ -11,7 +11,8 @@ namespace RedGate.Shared
         private readonly ICharacterReader[] _readers;
         private readonly IEqualityComparer<string> _comparer;
 
-        public ParallelWordFrequencyCounter(ICharacterReader[] readers) : this(readers, EqualityComparer<string>.Default)
+        public ParallelWordFrequencyCounter(ICharacterReader[] readers)
+            : this(readers, EqualityComparer<string>.Default)
         { }
 
         public ParallelWordFrequencyCounter(ICharacterReader[] readers, IEqualityComparer<string> comparer)
@@ -29,18 +30,9 @@ namespace RedGate.Shared
             {
                 using (var wordEnumerator = new WordEnumerator(reader))
                 {
-                    var localWordCounter = new Dictionary<string, int>();
-
                     while (wordEnumerator.MoveNext())
                     {
-                        var word = wordEnumerator.Current;
-                        localWordCounter[word] = localWordCounter.ContainsKey(word) ? ++localWordCounter[word] : 1;
-                    }
-
-                    foreach (var wordCounter in localWordCounter)
-                    {
-                        var counter = wordCounter;
-                        combinedWordCount.AddOrUpdate(counter.Key, counter.Value, (key, value) => counter.Value + value);
+                        combinedWordCount.AddOrUpdate(wordEnumerator.Current, 1, (key, value) => value + 1);
                     }
                 }
             });

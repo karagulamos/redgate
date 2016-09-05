@@ -21,7 +21,7 @@ namespace RedGate.Shared
 
         public bool MoveNext()
         {
-            Current = string.Empty;
+            Current = null;
             return !string.IsNullOrEmpty(Current);
         }
 
@@ -50,7 +50,7 @@ namespace RedGate.Shared
                         }
 
                         // Have we found a word yet?
-                        if (!string.IsNullOrEmpty(_currentWord)) break;
+                        if (_currentWord != null) break;
                     }
                 }
                 catch (EndOfStreamException) { }
