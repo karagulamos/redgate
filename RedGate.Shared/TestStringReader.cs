@@ -7,6 +7,7 @@ namespace RedGate.Shared
     {
         private int m_Pos = 0;
         private string m_Content = "It was the best of times, it was the worst of times";
+
         public char GetNextChar()
         {
             if (m_Pos >= m_Content.Length)
@@ -17,7 +18,6 @@ namespace RedGate.Shared
 
         public void Dispose()
         {
-
         }
     }
 }

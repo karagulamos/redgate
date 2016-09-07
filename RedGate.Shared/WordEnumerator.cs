@@ -17,7 +17,6 @@ namespace RedGate.Shared
 
         public void Dispose()
         {
-            _reader.Dispose();
         }
 
         public bool MoveNext()

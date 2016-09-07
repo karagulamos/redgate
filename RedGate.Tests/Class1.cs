@@ -10,7 +10,7 @@ namespace RedGateTests
 
     public class SimpleCharacterReader : ICharacterReader
     {
-        private int m_Pos = -1;
+        private int m_Pos = 0;
         private string m_Content = @"	
 It was the best of times, it was the worst of times,
 it was the age of wisdom, it was the age of foolishness,
@@ -37,14 +37,12 @@ settled for ever";
 
         public char GetNextChar()
         {
-            Interlocked.Increment(ref m_Pos);
-
             if (m_Pos >= m_Content.Length)
             {
                 throw new System.IO.EndOfStreamException();
             }
 
-            return m_Content[m_Pos];
+            return m_Content[m_Pos++];
         }
 
         public void Dispose()
@@ -56,7 +54,7 @@ settled for ever";
     public class SlowCharacterReader : ICharacterReader
     {
 
-        private int m_Pos = -1;
+        private int m_Pos = 0;
         private string m_Content = @"  Alice was beginning to get very tired of sitting by her sister
 on the bank, and of having nothing to do:  once or twice she had
 peeped into the book her sister was reading, but it had no
@@ -75,14 +73,12 @@ Rabbit with pink eyes ran close by her.";
         {
             Thread.Sleep(m_Rnd.Next(200));
 
-            Interlocked.Increment(ref m_Pos);
-
             if (m_Pos >= m_Content.Length)
             {
                 throw new System.IO.EndOfStreamException();
             }
             
-            return m_Content[m_Pos];
+            return m_Content[m_Pos++];
 
         }
 
