@@ -20,12 +20,15 @@ namespace RedGate.Shared
         public IDictionary<string, int> GetWordFrequency()
         {
             var wordFrequency = new Dictionary<string, int>(_comparer);
+
             using (var wordEnumerator = new WordEnumerator(_reader))
             {
                 while (wordEnumerator.MoveNext())
                 {
                     var word = wordEnumerator.Current;
-                    wordFrequency[word] = wordFrequency.ContainsKey(word) ? ++wordFrequency[word] : 1;
+                    int value;
+                    wordFrequency.TryGetValue(word, out value);
+                    wordFrequency[word] = ++value;
                 }
             }
 
@@ -34,7 +37,6 @@ namespace RedGate.Shared
 
         public void Dispose()
         {
-            _reader.Dispose();
         }
     }
 }

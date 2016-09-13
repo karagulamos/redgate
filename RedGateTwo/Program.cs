@@ -1,8 +1,7 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using RedGate.Shared;
+﻿using System.Linq;
+﻿using RedGate.Shared;
 using RedGateTests;
 
 namespace RedGateTwo
@@ -18,22 +17,28 @@ namespace RedGateTwo
 
             using (var wordCounter = new ParallelWordFrequencyCounter(characterReaders, StringComparer.InvariantCultureIgnoreCase))
             {
-                PrintOrderedWordCount(wordCounter.GetWordFrequency(), TimeSpan.FromSeconds(10));
+                wordCounter.EnableLogging(PrintOrderedWordCount, TimeSpan.FromSeconds(10));
+                var wordCounts = wordCounter.GetWordFrequency(); 
             }
 
+            Console.WriteLine("Done...");
             Console.ReadKey();
         }
 
-        private static void PrintOrderedWordCount(IDictionary<string, int> wordFrequencyMap, TimeSpan delay = default(TimeSpan))
+        private static void PrintOrderedWordCount(KeyValuePair<string, int>[] wordFrequencyMap)
         {
             var sortedWordFrequencies = wordFrequencyMap.OrderByDescending(d => d.Value)
                                                         .ThenBy(d => d.Key);
 
+            Console.WriteLine("Current word counts");
+            Console.WriteLine("===================");
+
             foreach (var map in sortedWordFrequencies)
             {
                 Console.WriteLine("{0} - {1}", map.Key.ToLower(), map.Value);
-                Thread.Sleep(delay);
             }
+
+            Console.WriteLine();
         }
 
     }

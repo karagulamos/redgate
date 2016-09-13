@@ -9,41 +9,66 @@ namespace RedGate.Shared
     public class ParallelWordFrequencyCounter : IWordFrequencyCounter
     {
         private readonly ICharacterReader[] _readers;
-        private readonly IEqualityComparer<string> _comparer;
+        private readonly ConcurrentDictionary<string, int> _combinedWordCount;
 
-        public ParallelWordFrequencyCounter(ICharacterReader[] readers)
-            : this(readers, EqualityComparer<string>.Default)
+        private volatile bool _consumerStarted; 
+        private Task _wordFrequencyConsumerTask;
+
+        public ParallelWordFrequencyCounter(ICharacterReader[] readers) : this(readers, EqualityComparer<string>.Default)
         { }
 
         public ParallelWordFrequencyCounter(ICharacterReader[] readers, IEqualityComparer<string> comparer)
         {
             _readers = readers;
-            _comparer = comparer;
+            _combinedWordCount = new ConcurrentDictionary<string, int>(comparer);
         }
 
-        public IDictionary<string, int> GetWordFrequency()
+        public void EnableLogging(Action<KeyValuePair<string, int>[]> logAction, TimeSpan delay = default(TimeSpan))
         {
-            var combinedWordCount = new ConcurrentDictionary<string, int>(_comparer);
+            if (logAction == null) return;
+
+            _consumerStarted = true;
+
+            _wordFrequencyConsumerTask = Task.Run(async () =>   // consumer
+            {
+                while (_consumerStarted)
+                {
+                    await Task.Delay(delay);
+                    logAction(_combinedWordCount.ToArray());
+                    // NOTE: 
+                    // Doing a ToArray() reacquires all underlying locks to give us an in-moment snapshot of the collection.
+                    // We could have safely used the default enumerator except that we're not guaranteed to receive the most 
+                    // recent snapshot of collection.
+                }
+            });
+        }
+
+        public IDictionary<string, int> GetWordFrequency() 
+        {
             var options = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount };
 
-            Parallel.ForEach(_readers, options, reader =>
+            Parallel.ForEach(_readers, options, reader =>   // producers
             {
                 using (var wordEnumerator = new WordEnumerator(reader))
                 {
                     while (wordEnumerator.MoveNext())
                     {
-                        combinedWordCount.AddOrUpdate(wordEnumerator.Current, 1, (key, value) => value + 1);
+                        var word = wordEnumerator.Current;
+                        _combinedWordCount.AddOrUpdate(word, 1, (key, value) => value + 1);
                     }
                 }
             });
 
-            return combinedWordCount;
+            return _combinedWordCount;
         }
 
         public void Dispose()
         {
-            foreach (var reader in _readers)
-                reader.Dispose();
+            if (_wordFrequencyConsumerTask == null) return;
+
+            _consumerStarted = false;
+            _wordFrequencyConsumerTask.Wait();
+            _wordFrequencyConsumerTask.Dispose();
         }
     }
 }
