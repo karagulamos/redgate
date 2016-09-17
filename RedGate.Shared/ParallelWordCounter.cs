@@ -48,8 +48,8 @@ namespace RedGate.Shared
                     logAction(_combinedWordCount.ToArray());
                     // NOTE: 
                     // Using ToArray() on the concurrent dictionary can be slow as it first has to reacquire all underlying locks 
-                    // to give us an in-moment snapshot of the collection. We could have safely used the default enumerator instead 
-                    // but we're not guaranteed to receive the most recent snapshot of the collection.
+                    // to give us an in-moment snapshot of the collection. We could safely use the default enumerator but we're 
+                    // not guaranteed to receive the most recent snapshot of the collection.
                 }
             });
         }

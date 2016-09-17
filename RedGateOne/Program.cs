@@ -6,9 +6,9 @@ using RedGateTests;
 
 namespace RedGateOne
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             using (var wordCounter = new WordCounter(new SimpleCharacterReader(), StringComparer.InvariantCultureIgnoreCase))
             {
