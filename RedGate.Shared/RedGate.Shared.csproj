@@ -36,11 +36,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="WordEnumerator.cs" />
-    <Compile Include="IWordFrequencyCounter.cs" />
-    <Compile Include="ParallelWordFrequencyCounter.cs" />
+    <Compile Include="IWordCounter.cs" />
+    <Compile Include="ParallelWordCounter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestStringReader.cs" />
-    <Compile Include="WordFrequencyCounter.cs" />
+    <Compile Include="WordCounter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RedGate.Tests\RedGate.Tests.csproj">

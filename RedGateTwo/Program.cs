@@ -15,27 +15,27 @@ namespace RedGateTwo
                 new SlowCharacterReader(), new SimpleCharacterReader()
             };
 
-            using (var wordCounter = new ParallelWordFrequencyCounter(characterReaders, StringComparer.InvariantCultureIgnoreCase))
+            using (var wordCounter = new ParallelWordCounter(characterReaders, StringComparer.InvariantCultureIgnoreCase))
             {
                 wordCounter.EnableLogging(PrintOrderedWordCount, TimeSpan.FromSeconds(10));
-                var wordCounts = wordCounter.GetWordFrequency(); 
+                var wordCount = wordCounter.GetWordCount();
             }
 
             Console.WriteLine("Done...");
             Console.ReadKey();
         }
 
-        private static void PrintOrderedWordCount(KeyValuePair<string, int>[] wordFrequencyMap)
+        private static void PrintOrderedWordCount(KeyValuePair<string, int>[] wordCount)
         {
-            var sortedWordFrequencies = wordFrequencyMap.OrderByDescending(d => d.Value)
-                                                        .ThenBy(d => d.Key);
+            var sortedWordCount = wordCount.OrderByDescending(d => d.Value)
+                                           .ThenBy(d => d.Key);
 
             Console.WriteLine("Current word counts");
             Console.WriteLine("===================");
 
-            foreach (var map in sortedWordFrequencies)
+            foreach (var pair in sortedWordCount)
             {
-                Console.WriteLine("{0} - {1}", map.Key.ToLower(), map.Value);
+                Console.WriteLine("{0} - {1}", pair.Key.ToLower(), pair.Value);
             }
 
             Console.WriteLine();

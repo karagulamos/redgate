@@ -10,22 +10,22 @@ namespace RedGateOne
     {
         static void Main(string[] args)
         {
-            using (var wordCounter = new WordFrequencyCounter(new SimpleCharacterReader(), StringComparer.InvariantCultureIgnoreCase))
+            using (var wordCounter = new WordCounter(new SimpleCharacterReader(), StringComparer.InvariantCultureIgnoreCase))
             {
-                PrintOrderedWordFrequency(wordCounter.GetWordFrequency());
+                PrintOrderedWordCount(wordCounter.GetWordCount());
             }
             
             Console.ReadKey();
         }
 
-        private static void PrintOrderedWordFrequency(IDictionary<string, int> wordFrequencyMap)
+        private static void PrintOrderedWordCount(IDictionary<string, int> wordCount)
         {
-            var sortedWordFrequencies = wordFrequencyMap.OrderByDescending(d => d.Value)
-                                                        .ThenBy(d => d.Key);
+            var sortedWordCount = wordCount.OrderByDescending(d => d.Value)
+                                           .ThenBy(d => d.Key);
 
-            foreach (var map in sortedWordFrequencies)
+            foreach (var pair in sortedWordCount)
             {
-                Console.WriteLine("{0} - {1}", map.Key.ToLower(), map.Value);
+                Console.WriteLine("{0} - {1}", pair.Key.ToLower(), pair.Value);
             }
         }
 

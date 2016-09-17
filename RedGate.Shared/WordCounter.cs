@@ -3,21 +3,21 @@ using RedGateTests;
 
 namespace RedGate.Shared
 {
-    public class WordFrequencyCounter : IWordFrequencyCounter
+    public class WordCounter : IWordCounter
     {
         private readonly ICharacterReader _reader;
         private readonly IEqualityComparer<string> _comparer;
 
-        public WordFrequencyCounter(ICharacterReader reader) : this(reader, EqualityComparer<string>.Default)
+        public WordCounter(ICharacterReader reader) : this(reader, EqualityComparer<string>.Default)
         {}
 
-        public WordFrequencyCounter(ICharacterReader reader, IEqualityComparer<string> comparer)
+        public WordCounter(ICharacterReader reader, IEqualityComparer<string> comparer)
         {
             _reader = reader;
             _comparer = comparer;
         }
 
-        public IDictionary<string, int> GetWordFrequency()
+        public IDictionary<string, int> GetWordCount()
         {
             var wordFrequency = new Dictionary<string, int>(_comparer);
 
