@@ -42,7 +42,7 @@ settled for ever";
                 throw new System.IO.EndOfStreamException();
             }
 
-            return m_Content[m_Pos++];
+            return m_Content[Interlocked.Increment(ref m_Pos)];
         }
 
         public void Dispose()
@@ -78,7 +78,7 @@ Rabbit with pink eyes ran close by her.";
                 throw new System.IO.EndOfStreamException();
             }
             
-            return m_Content[m_Pos++];
+            return m_Content[Interlocked.Increment(ref m_Pos)];
 
         }
 
